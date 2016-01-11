@@ -1,0 +1,3 @@
+module Commutator
+  VERSION = "0.1.0"
+end
