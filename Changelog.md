@@ -1,6 +1,7 @@
 ### Development
 [Full Changelog](http://github.com/tablexi/commutator/compare/v0.1.0...master)
 
+* Add `Commutator::Collection::CachedLookup` (Bradley Schaefer)
 
 ### 0.1.0 / 2016-01-11
 

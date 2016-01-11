@@ -5,6 +5,8 @@ module Commutator
   # NOTE: This can't use SimpleDelegator because `Seahorse::Client::Response` does
   #       not implement `#respond_to?` as needed.
   class Collection
+    autoload :CachedLookup, "commutator/collection/cached_lookup"
+
     delegate :count,
              :scanned_count,
              :last_evaluated_key,
