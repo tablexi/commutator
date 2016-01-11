@@ -67,6 +67,7 @@ module Commutator
 
         hash.keep_if { |_key, value| value.present? || value == false }
       end
+      alias :to_hash :to_h
     end
   end
 end

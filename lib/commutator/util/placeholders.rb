@@ -1,3 +1,5 @@
+require 'ice_nine'
+
 module Commutator
   module Util
     # Provides a placeholder string for a name or value for use in DynamoDB
