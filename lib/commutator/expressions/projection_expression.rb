@@ -10,7 +10,7 @@ module Commutator
     # docs there for placeholder syntax.
     #
     # Usage:
-    # exp = Dynamo::Expressions::ProjectionExpression.new
+    # exp = Commutator::Expressions::ProjectionExpression.new
     #       .path('token_channel')
     #       .path('ts.items[2]')
     #       .path('#?', names: ['count'])

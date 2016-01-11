@@ -1,5 +1,9 @@
+require "commutator/model/attributes"
+require "commutator/model/table_configuration"
+require "commutator/model/hooks"
+
 module Commutator
-  # Basic CRUD wrapper for items in a dynamo table.
+  # Basic CRUD wrapper for items in a dynamodb table.
   #
   # This module is focused on collections of homogenous items within a
   # single table.
@@ -7,7 +11,7 @@ module Commutator
   # TODO: support multiple tables
   #
   # class Person
-  #   include Dynamo::Model
+  #   include Commutator::Model
   #
   #   attribute :first_name,
   #             :last_name,
@@ -27,9 +31,9 @@ module Commutator
     extend ActiveSupport::Concern
 
     include ActiveModel::Model
-    include Dynamo::Model::Attributes
-    include Dynamo::Model::TableConfiguration
-    include Dynamo::Model::Hooks
+    include Commutator::Model::Attributes
+    include Commutator::Model::TableConfiguration
+    include Commutator::Model::Hooks
 
     # These build up some basic Dynamo request options related to a particular
     # api action so that we don't have to specify them every time. They don't
@@ -141,7 +145,7 @@ module Commutator
       end
 
       def client
-        @client ||= ::Dynamo::SimpleClient.new
+        @client ||= ::Commutator::SimpleClient.new
       end
 
       def create(attrs)
@@ -203,7 +207,7 @@ module Commutator
 
       def enhance_options(const_name, scopes = nil)
         Class.new(Options.const_get(const_name)) do
-          include ::Dynamo::Util::Fluent
+          include ::Commutator::Util::Fluent
           include scopes if scopes && %w[Query Scan].include?(const_name)
 
           fluent_accessor :_proxy

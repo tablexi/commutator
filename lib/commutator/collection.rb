@@ -1,9 +1,9 @@
 module Commutator
-  # Wraps a Dynamo response from query or scan operations to provide
+  # Wraps a DynamoDB response from query or scan operations to provide
   # a collection of instances of the given class.
   #
-  # NOTE: This can't use SimpleDelegator because Seahorse::Client::Response does
-  #       not implement respond_to? as needed.
+  # NOTE: This can't use SimpleDelegator because `Seahorse::Client::Response` does
+  #       not implement `#respond_to?` as needed.
   class Collection
     delegate :count,
              :scanned_count,

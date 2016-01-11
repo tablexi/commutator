@@ -2,7 +2,7 @@ module Commutator
   module Model
     # This module provides methods related to registering attributes
     # and generating attr_accessors, ultimately for the purpose of
-    # enabling Dynamo::Model to know which attributes to send to the db.
+    # enabling Commutator::Model to know which attributes to send to the db.
     module Attributes
       extend ActiveSupport::Concern
 

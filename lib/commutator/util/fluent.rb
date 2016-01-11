@@ -5,7 +5,7 @@ module Commutator
     #
     # Usage:
     # class Person
-    #   include Dynamo::Util::Fluent
+    #   include Commutator::Util::Fluent
     #
     #   fluent_accessor :first_name,
     #                   :last_name,

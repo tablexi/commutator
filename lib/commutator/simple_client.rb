@@ -1,5 +1,6 @@
 module Commutator
-  # Provides a pre-configured instance of Aws::DynamoDB::Client
+  # Provides an instance of `Aws::DynamoDB::Client` with conversions for passing
+  # Commutator objects to API operations.
   #
   # `:client => ` may be provided as an `Aws::DynamoDB::Client` instance
   # otherwise this instantiates a `Aws::DynamoDB::Client` with the provided options

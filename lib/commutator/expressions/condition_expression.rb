@@ -10,7 +10,7 @@ module Commutator
     # the Statement constructor. Read the docs there for placeholder syntax.
     #
     # Usage:
-    # exp = Dynamo::Expressions::ConditionExpression.new
+    # exp = Commutator::Expressions::ConditionExpression.new
     #       .where('token_channel = :?', values: ['123'])
     #       .and('ts > :?', values: [1344])
     #

@@ -10,7 +10,7 @@ module Commutator
     # the Statement constructor. Read the docs there for placeholder syntax.
     #
     # Usage:
-    # exp = Dynamo::Expressions::UpdateExpression.new
+    # exp = Commutator::Expressions::UpdateExpression.new
     #       .set('username = :?', values: ['user1'])
     #       .set('email = :?', values: ['a@b.c'])
     #       .add('login_count :?', values: [1])
