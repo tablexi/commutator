@@ -48,9 +48,11 @@ module Commutator
       before_get_item :configure_default_get_item
 
       class_attribute :collection_item_modifiers, instance_accessor: false
+      class_attribute :client
+      self.client = ::Commutator::SimpleClient.new
     end
 
-    delegate :client, :options_class, to: 'self.class'
+    delegate :options_class, to: 'self.class'
 
     def initialize(attrs = {})
       assign_attributes(attrs.symbolize_keys)
@@ -130,8 +132,6 @@ module Commutator
 
     # :nodoc:
     module ClassMethods
-      attr_writer :client
-
       def inherited(subclass)
         subclass.attribute_names.merge(attribute_names)
         before_hooks.each { |k, v| subclass.before_hooks[k] = v.dup }
@@ -144,16 +144,14 @@ module Commutator
         subclass.const_set("Scopes", Module.new { include scopes }) if scopes
       end
 
-      def client
-        @client ||= ::Commutator::SimpleClient.new
-      end
-
       def create(attrs)
         new(attrs).tap { |dp| dp.put_item_options.execute }
       end
 
       def modify_collection_items_with(*modifiers, factory: false)
-        self.collection_item_modifiers = [ItemModifiers.new(modifiers, factory: factory)].unshift(*collection_item_modifiers)
+        self.collection_item_modifiers = [
+          ItemModifiers.new(modifiers, factory: factory)
+        ].unshift(*collection_item_modifiers)
       end
 
       def get_item_options
