@@ -1,7 +1,17 @@
 ### Development
-[Full Changelog](http://github.com/tablexi/commutator/compare/v0.1.0...master)
+[Full Changelog](http://github.com/tablexi/commutator/compare/v0.1.1...master)
+
+### Development
+[Full Changelog](http://github.com/tablexi/commutator/compare/v0.1.0...v0.1.1)
+
+Features:
 
 * Add `Commutator::Collection::CachedLookup` (Bradley Schaefer)
+
+Bug fixes:
+
+* Change lazy-loading of Commutator::Model.client to be eager-loaded
+  to facilitate the ability to override the client. (Bradley Schaefer)
 
 ### 0.1.0 / 2016-01-11
 
