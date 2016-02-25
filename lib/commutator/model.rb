@@ -139,6 +139,12 @@ module Commutator
         subclass.table_name(table_name)
         subclass.primary_key(hash: primary_key_hash_name,
                              range: primary_key_range_name)
+        option_class_cache = Concurrent::Map.new do |h, k|
+          scopes = self.const_defined?("Scopes", false) ? self.const_get("Scopes") : nil
+          const_name = k.to_s.camelize
+          h[k] = enhance_options(const_name, scopes)
+        end
+        subclass.instance_variable_set("@scoped_options", option_class_cache)
 
         scopes = const_defined?("Scopes", false) ? const_get("Scopes") : nil
         subclass.const_set("Scopes", Module.new { include scopes }) if scopes
@@ -184,11 +190,6 @@ module Commutator
       end
 
       def options_class(operation)
-        @scoped_options ||= Hash.new do |h, k|
-          scopes = self.const_defined?("Scopes", false) ? self.const_get("Scopes") : nil
-          const_name = k.to_s.camelize
-          h[k] = enhance_options(const_name, scopes)
-        end
         @scoped_options[operation]
       end
 
@@ -204,12 +205,16 @@ module Commutator
       private
 
       def enhance_options(const_name, scopes = nil)
-        Class.new(Options.const_get(const_name)) do
+        Class.new(Options.const_get(const_name, false)) do
           include ::Commutator::Util::Fluent
           include scopes if scopes && %w[Query Scan].include?(const_name)
 
           fluent_accessor :_proxy
           delegate :context, to: :_proxy
+
+          def inspect
+            "#{const_name}Proxy (#{(public_methods.sort - Object.methods).join(", ")})"
+          end
         end
       end
 
