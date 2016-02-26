@@ -50,6 +50,9 @@ module Commutator
       class_attribute :collection_item_modifiers, instance_accessor: false
       class_attribute :client
       self.client = ::Commutator::SimpleClient.new
+
+      class_attribute :scoped_options, instance_accessor: false
+      self.scoped_options = options_cache_class
     end
 
     delegate :options_class, to: 'self.class'
@@ -139,12 +142,7 @@ module Commutator
         subclass.table_name(table_name)
         subclass.primary_key(hash: primary_key_hash_name,
                              range: primary_key_range_name)
-        option_class_cache = Concurrent::Map.new do |h, k|
-          scopes = self.const_defined?("Scopes", false) ? self.const_get("Scopes") : nil
-          const_name = k.to_s.camelize
-          h[k] = enhance_options(const_name, scopes)
-        end
-        subclass.instance_variable_set("@scoped_options", option_class_cache)
+        subclass.scoped_options = option_class_cache
 
         scopes = const_defined?("Scopes", false) ? const_get("Scopes") : nil
         subclass.const_set("Scopes", Module.new { include scopes }) if scopes
@@ -190,7 +188,7 @@ module Commutator
       end
 
       def options_class(operation)
-        @scoped_options[operation]
+        scoped_options[operation]
       end
 
       def method_missing(method, *args)
@@ -203,6 +201,14 @@ module Commutator
       end
 
       private
+
+      def options_cache_class
+        Concurrent::Map.new do |h, k|
+          scopes = self.const_defined?("Scopes", false) ? self.const_get("Scopes") : nil
+          const_name = k.to_s.camelize
+          h[k] = enhance_options(const_name, scopes)
+        end
+      end
 
       def enhance_options(const_name, scopes = nil)
         Class.new(Options.const_get(const_name, false)) do
