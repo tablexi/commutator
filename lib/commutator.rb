@@ -1,7 +1,8 @@
 require "aws-sdk"
 
-require "active_model"
+require "concurrent/map"
 
+require "active_model"
 require "active_support"
 require "active_support/core_ext"
 
