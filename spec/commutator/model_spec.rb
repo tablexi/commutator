@@ -74,8 +74,8 @@ RSpec.describe Commutator::Model, :dynamo do
       expect(actual).to be_a(Commutator::Collection)
     end
 
-    it 'includes the Scopes module' do
-      test_class.class_eval do
+    def add_user_age_scopes_module(klass)
+      klass.class_eval do
         const_set("Scopes", Module.new {
           def user_age(username, age)
             with_key_condition_expression do |exp|
@@ -85,9 +85,23 @@ RSpec.describe Commutator::Model, :dynamo do
           end
         })
       end
+    end
 
-      actual = test_class.query_options.user_age("x", 100).execute
+    it 'includes the Scopes module' do
+      add_user_age_scopes_module test_class
+
+      actual = test_class.user_age("x", 100).execute
       expect(actual).to be_a(Commutator::Collection)
+    end
+
+    it 'copies scopes modules into classes inheriting Model classes' do
+      add_user_age_scopes_module test_class
+      subclass = Class.new(test_class)
+
+      actual = subclass.user_age("x", 100).execute
+
+      expect(actual).to be_a(Commutator::Collection)
+      expect(subclass::Scopes).not_to eq(test_class::Scopes)
     end
   end
 

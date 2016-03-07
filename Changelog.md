@@ -1,6 +1,10 @@
 ### Development
 [Full Changelog](http://github.com/tablexi/commutator/compare/v0.2.0...master)
 
+Bug fixes:
+
+* Fixed incorrect method name in `inherited` Scope-copying code (Bradley Schaefer)
+
 ### 0.2.0 / 2016-03-07
 
 Features:

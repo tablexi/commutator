@@ -142,7 +142,7 @@ module Commutator
         subclass.table_name(table_name)
         subclass.primary_key(hash: primary_key_hash_name,
                              range: primary_key_range_name)
-        subclass.scoped_options = option_class_cache
+        subclass.scoped_options = options_cache_class
 
         scopes = const_defined?("Scopes", false) ? const_get("Scopes") : nil
         subclass.const_set("Scopes", Module.new { include scopes }) if scopes
