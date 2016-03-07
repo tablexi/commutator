@@ -205,8 +205,10 @@ module Commutator
       def options_cache_class
         Concurrent::Map.new do |h, k|
           scopes = self.const_defined?("Scopes", false) ? self.const_get("Scopes") : nil
-          const_name = k.to_s.camelize
-          h[k] = enhance_options(const_name, scopes)
+          h.compute_if_absent(k) do
+            const_name = k.to_s.camelize
+            enhance_options(const_name, scopes)
+          end
         end
       end
 
