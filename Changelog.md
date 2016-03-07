@@ -1,5 +1,16 @@
 ### Development
-[Full Changelog](http://github.com/tablexi/commutator/compare/v0.1.1...master)
+[Full Changelog](http://github.com/tablexi/commutator/compare/v0.2.0...master)
+
+### 0.2.0 / 2016-03-07
+
+Features:
+
+* Can configure table name at the instance level. (Bradley Schaefer)
+* Port over a ton of Ben Kimpel's tests (Bradley Schaefer)
+
+Bug fixes:
+
+* Resolve a concurrency bug involving lazy instantiation (Bradley Schaefer)
 
 ### 0.1.1 / 2016-01-15
 [Full Changelog](http://github.com/tablexi/commutator/compare/v0.1.0...v0.1.1)
