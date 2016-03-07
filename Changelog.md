@@ -1,5 +1,7 @@
 ### Development
-[Full Changelog](http://github.com/tablexi/commutator/compare/v0.2.0...master)
+[Full Changelog](http://github.com/tablexi/commutator/compare/v0.2.1...master)
+
+### 0.2.1 / 2016-03-07
 
 Bug fixes:
 
