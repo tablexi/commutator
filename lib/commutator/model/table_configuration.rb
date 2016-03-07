@@ -16,8 +16,17 @@ module Commutator
         send(primary_key_range_name) if primary_key_range_name.present?
       end
 
-      def table_name
-        self.class.table_name
+      included do
+        class_attribute :table_name
+
+        class << self
+          prepend(Module.new do
+            def table_name(*args)
+              return super if args.size == 0
+              send("table_name=", *args)
+            end
+          end)
+        end
       end
 
       # :nodoc:

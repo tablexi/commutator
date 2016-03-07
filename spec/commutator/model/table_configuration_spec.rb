@@ -21,9 +21,25 @@ RSpec.describe Commutator::Model::TableConfiguration do
     end
   end
 
+  describe ".table_name" do
+    it "takes an argument in order to set the value" do
+      expect(test_class.table_name).to eq 'test_table'
+      test_class.table_name 'nonsense'
+      expect(test_class.table_name).to eq 'nonsense'
+    end
+  end
+
   describe '#table_name' do
-    it 'delegates to .table_name' do
+    it 'picks up the class level table_name value' do
       expect(instance.table_name).to eq(test_class.table_name)
+    end
+  end
+
+  describe '#table_name=' do
+    it 'sets the instance table name to a value that differs from the class-level value' do
+      instance.table_name = 'new value'
+      expect(instance.table_name).to eq 'new value'
+      expect(instance.class.table_name).not_to eq(instance.table_name)
     end
   end
 
