@@ -21,6 +21,14 @@ RSpec.describe Commutator::Model::TableConfiguration do
     end
   end
 
+  describe ".table_name" do
+    it "takes an argument in order to set the value" do
+      expect(test_class.table_name).to eq 'test_table'
+      test_class.table_name 'nonsense'
+      expect(test_class.table_name).to eq 'nonsense'
+    end
+  end
+
   describe '#table_name' do
     it 'picks up the class level table_name value' do
       expect(instance.table_name).to eq(test_class.table_name)
