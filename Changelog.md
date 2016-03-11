@@ -1,17 +1,22 @@
 ### Development
-[Full Changelog](http://github.com/tablexi/commutator/compare/v0.2.1...master)
+[Full Changelog](http://github.com/tablexi/commutator/compare/v0.2.2...master)
+
+### 0.2.2 / 2016-03-07
+[Full Changelog](http://github.com/tablexi/commutator/compare/v0.2.1...v0.2.2)
 
 Bug fixes:
 
 * Accept any arguments for `respond_to?` in `Commutator::Model` (Bradley Schaefer) 
 
 ### 0.2.1 / 2016-03-07
+[Full Changelog](http://github.com/tablexi/commutator/compare/v0.2.0...v0.2.1)
 
 Bug fixes:
 
 * Fixed incorrect method name in `inherited` Scope-copying code (Bradley Schaefer)
 
 ### 0.2.0 / 2016-03-07
+[Full Changelog](http://github.com/tablexi/commutator/compare/v0.1.1...v0.2.0)
 
 Features:
 
