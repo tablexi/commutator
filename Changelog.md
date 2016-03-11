@@ -1,6 +1,10 @@
 ### Development
 [Full Changelog](http://github.com/tablexi/commutator/compare/v0.2.1...master)
 
+Bug fixes:
+
+* Accept any arguments for `respond_to?` in `Commutator::Model` (Bradley Schaefer) 
+
 ### 0.2.1 / 2016-03-07
 
 Bug fixes:

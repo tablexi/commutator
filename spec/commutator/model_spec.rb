@@ -290,4 +290,14 @@ RSpec.describe Commutator::Model, :dynamo do
       expect(test_class.scan.each_item.first.modified?).to eq 2
     end
   end
+
+  describe "REGRESSION: implemented wrong number of arguments for respond_to?" do
+    it "allows RSpec to create a spy object" do
+      allow(test_class).to receive(:new)
+    end
+
+    it "accepts a second argument to #respond_to?" do
+      test_class.respond_to?(:hadouken, true)
+    end
+  end
 end

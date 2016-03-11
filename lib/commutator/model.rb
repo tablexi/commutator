@@ -196,7 +196,7 @@ module Commutator
         query_options.send(method, *args)
       end
 
-      def respond_to?(method)
+      def respond_to?(method, *args)
         super || (const_defined?(:Scopes, false) && const_get(:Scopes).method_defined?(method))
       end
 
