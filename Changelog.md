@@ -1,6 +1,11 @@
 ### Development
 [Full Changelog](http://github.com/tablexi/commutator/compare/v0.2.2...master)
 
+Bug fixes:
+
+* Return meaningful string from Commutator::Proxy::Options#inspect rather
+  than raising an error. Fixes #7 (Bradley Schaefer)
+
 ### 0.2.2 / 2016-03-07
 [Full Changelog](http://github.com/tablexi/commutator/compare/v0.2.1...v0.2.2)
 
