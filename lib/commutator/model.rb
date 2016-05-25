@@ -220,8 +220,13 @@ module Commutator
           fluent_accessor :_proxy
           delegate :context, to: :_proxy
 
+          @action = const_name
+          def self.action
+            @action
+          end
+
           def inspect
-            "#{const_name}Proxy (#{(public_methods.sort - Object.methods).join(", ")})"
+            "#<#{self.class.action}Options #{to_h}>"
           end
         end
       end

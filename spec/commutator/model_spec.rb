@@ -272,7 +272,7 @@ RSpec.describe Commutator::Model, :dynamo do
       expect(item).to be_modified
     end
 
-    it "modifies returned items with a proc's return value when factory: true" do
+    it "modifies returned items with a Proc's return value when factory: true" do
       number = 0
       modifier = Proc.new do
         number += 1
@@ -298,6 +298,24 @@ RSpec.describe Commutator::Model, :dynamo do
 
     it "accepts a second argument to #respond_to?" do
       test_class.respond_to?(:hadouken, true)
+    end
+  end
+
+  %i[put_item update_item].each do |operation|
+    context "##{operation}_options" do
+      it "has a meaningful #inspect" do
+        proxy = model.send("#{operation}_options")
+        expect(proxy.inspect).to match /#{operation}/
+      end
+    end
+  end
+
+  %i[query scan get_item].each do |operation|
+    context ".#{operation}_options" do
+      it "has a meaningful #inspect" do
+        proxy = test_class.send("#{operation}_options")
+        expect(proxy.inspect).to match /#{operation}/
+      end
     end
   end
 end
