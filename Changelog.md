@@ -5,6 +5,8 @@ Bug fixes:
 
 * Return meaningful string from Commutator::Proxy::Options#inspect rather
   than raising an error. Fixes #7 (Bradley Schaefer)
+* Support Ruby 2.3+ - a compatibility issue was exposed by implementing
+  TravisCI integration. (Bradley Schaefer)
 
 ### 0.2.2 / 2016-03-07
 [Full Changelog](http://github.com/tablexi/commutator/compare/v0.2.1...v0.2.2)
