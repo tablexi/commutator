@@ -11,7 +11,8 @@ services:
 before_install:
   - docker build -t commutator/dynamo-local -f Dockerfile.ci .
   - docker run -d -p 127.0.0.1:8000:8000 commutator/dynamo-local -inMemory -port 8000
-  - docker ps
+  - export AWS_ACCESS_KEY_ID=123
+  - export AWS_SECRET_ACCESS_KEY=abc
 
 script:
   - bundle exec rspec
