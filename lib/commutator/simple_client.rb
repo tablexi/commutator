@@ -17,10 +17,10 @@ module Commutator
       super Aws::DynamoDB::Client.new(options)
     end
 
-    # `**kwargs` automatically calls `to_hash` on Options instances
     API_OPERATIONS.each do |operation|
-      define_method(operation) do |**kwargs|
-        super kwargs
+      define_method(operation) do |kwargs|
+        kwargs = kwargs.to_hash if kwargs.respond_to? :to_hash
+        __getobj__.send(operation, kwargs)
       end
     end
   end
