@@ -1,4 +1,20 @@
+sudo: required
+
 language: ruby
+
 rvm:
-  - 2.2.1
-before_install: gem install bundler -v 1.11.2
+  - 2.3.1
+  - 2.2.5
+  - 2.1.9
+
+services:
+  - docker
+
+before_install:
+  - docker build -t commutator/dynamo-local -f Dockerfile.ci .
+  - docker run -d -p 127.0.0.1:8000:8000 commutator/dynamo-local -inMemory -port 8000
+  - export AWS_ACCESS_KEY_ID=123
+  - export AWS_SECRET_ACCESS_KEY=abc
+
+script:
+  - bundle exec rspec
